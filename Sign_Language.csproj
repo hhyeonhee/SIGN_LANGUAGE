@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<OutputType>WinExe</OutputType>
+		<UseWPF>true</UseWPF>
+		<TargetFramework>net8.0-windows</TargetFramework>
+		<!-- 어셈블리 정보 자동 생성 중지 -->
+		<GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.CognitiveServices.Speech" Version="1.45.0" />
+		<PackageReference Include="WpfAnimatedGif"               Version="2.0.2" />
+		<PackageReference Include="Newtonsoft.Json"              Version="13.0.3" />
+		<!-- 기타 패키지… -->
+	</ItemGroup>
+
+	<ItemGroup>
+		<!-- imgs 폴더 전체를 WPF 리소스로 포함 -->
+		<Resource Include="imgs\**\*.*" />
+	</ItemGroup>
+</Project>

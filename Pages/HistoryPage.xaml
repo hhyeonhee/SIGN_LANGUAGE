@@ -1,0 +1,183 @@
+﻿<Page
+    x:Class="Sign_Language.Pages.HistoryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Title="HistoryPage"
+    FontFamily="Noto Sans KR">
+
+    <Grid Background="White" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 상단: 뒤로가기 / 타이틀 / 전체삭제 -->
+        <Grid Grid.Row="0" Margin="0,0,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- 뒤로가기 버튼 -->
+            <Button Grid.Column="0"
+                      Width="40" Height="40"
+                      Background="#2196F3"
+                      BorderBrush="#4A90E2"
+                      BorderThickness="1"
+                      Click="Back_Click"
+                      Padding="0"
+                      Margin="0,0,10,0">
+                        <Button.Resources>
+                            <Style TargetType="Border">
+                                <Setter Property="CornerRadius" Value="20"/>
+                            </Style>
+                        </Button.Resources>
+                        <Image Source="/imgs/back.png" Width="20" Height="20"/>
+            </Button>
+
+            <!-- 가운데 타이틀 -->
+            <TextBlock Grid.Column="1"
+                         Text="조회 이력"
+                         FontSize="18"
+                         FontWeight="Bold"
+                         VerticalAlignment="Center"
+                         HorizontalAlignment="Center"/>
+
+            <!-- 전체삭제 버튼 -->
+            <Button Grid.Column="2"
+                      Width="90" Height="35"
+                      Background="#2196F3"
+                      BorderBrush="#4A90E2"
+                      BorderThickness="1"
+                      Click="DeleteAll_Click"
+                      Padding="8,0">
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="16"/>
+                    </Style>
+                </Button.Resources>
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+                            <Image Source="/imgs/delete_white.png"
+                                     Width="20" Height="20"
+                                     Margin="0,0,0,0"/>
+                            <TextBlock Text="전체삭제"
+                                         Foreground="White"
+                                         FontWeight="Bold"
+                                         VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+        </Grid>
+
+        <!-- 조회 이력 테이블 -->
+        <DataGrid x:Name="HistoryDataGrid"
+                  Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  HeadersVisibility="Column"
+                  CanUserAddRows="False"
+                  CanUserDeleteRows="False"
+                  IsReadOnly="True"
+                  ColumnHeaderHeight="30"
+                  RowHeight="40"
+                  BorderBrush="#4A90E2"
+                  BorderThickness="1"
+                  GridLinesVisibility="All"
+                  HorizontalGridLinesBrush="Black"
+                  VerticalGridLinesBrush="Black"
+                  HorizontalScrollBarVisibility="Disabled"
+                  SelectionChanged="HistoryDataGrid_SelectionChanged">
+
+            <!-- 헤더 스타일 -->
+            <DataGrid.ColumnHeaderStyle>
+                <Style TargetType="DataGridColumnHeader">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    <Setter Property="VerticalContentAlignment"   Value="Center"/>
+                    <Setter Property="Background"                  Value="#2196F3"/>
+                    <Setter Property="Foreground"                  Value="White"/>
+                    <Setter Property="BorderBrush"                 Value="White"/>
+                    <Setter Property="BorderThickness"             Value="0.5"/>
+                </Style>
+            </DataGrid.ColumnHeaderStyle>
+
+            <DataGrid.Columns>
+                <!-- 번호 -->
+                <DataGridTextColumn Header="번호"
+                            Binding="{Binding HistoryNum}"
+                            Width="30">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment"   Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- 날짜 -->
+                <DataGridTextColumn Header="날짜"
+                            Binding="{Binding Time, StringFormat={}{0:yy-MM-dd}}"
+                            Width="60">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="TextBlock">
+                            <Setter Property="HorizontalAlignment" Value="Center"/>
+                            <Setter Property="VerticalAlignment"   Value="Center"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
+
+                <!-- 문장 (드래그 스크롤 가능) -->
+                <DataGridTemplateColumn Header="문장" Width="*">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <ScrollViewer
+                                HorizontalScrollBarVisibility="Hidden"
+                                VerticalScrollBarVisibility="Disabled"
+                                Padding="4,0,0,0"
+                                PanningMode="HorizontalOnly"
+                                PreviewMouseLeftButtonDown="ScrollViewer_PreviewMouseLeftButtonDown"
+                                PreviewMouseMove="ScrollViewer_PreviewMouseMove"
+                                PreviewMouseLeftButtonUp="ScrollViewer_PreviewMouseLeftButtonUp">
+                                <TextBlock Text="{Binding Text}"
+                                VerticalAlignment="Center"/>
+                            </ScrollViewer>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- 재생 버튼 -->
+                <DataGridTemplateColumn Header="재생" Width="35">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Width="30" Height="30"
+                                      Background="Transparent"
+                                      BorderThickness="0"
+                                      Click="PlayButton_Click">
+                                    <Image Source="/imgs/play_circle.png"
+                                           Width="20" Height="20"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+                <!-- 삭제 버튼 -->
+                <DataGridTemplateColumn Header="삭제" Width="35">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Width="30" Height="30"
+                                      Background="Transparent"
+                                      BorderThickness="0"
+                                      Click="DeleteButton_Click">
+                                <Image Source="/imgs/delete.png"
+                                       Width="20" Height="20"/>
+                            </Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

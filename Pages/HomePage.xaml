@@ -1,0 +1,75 @@
+﻿<Page x:Class="Sign_Language.Pages.HomePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      Background="White">
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- 상단 타이틀 (로고 + 텍스트) -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,20">
+            <Image Source="/imgs/logo.png" Width="32" Height="32" Margin="0,0,10,0"/>
+            <TextBlock Text="AI Sign"
+                       FontSize="24"
+                       FontWeight="Bold"
+                       VerticalAlignment="Center"
+                       Foreground="#4A90E2" />
+        </StackPanel>
+
+        <!-- 버튼 그룹 -->
+        <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <!-- 음성 변환 버튼 -->
+            <Button Width="200" Height="100" Background="#2196F3" BorderBrush="#4A90E2" 
+                    BorderThickness="1" Click="Convert_Click" Margin="0,0,0,20">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <Image Source="/imgs/mic.png" Width="48" Height="48" Margin="0,5"/>
+                    <TextBlock Text="음성 변환" FontSize="16" Foreground="white" FontWeight="SemiBold" TextAlignment="Center" FontFamily="Noto Sans KR"/>
+                </StackPanel>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="16" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- 수어 학습 버튼 -->
+            <Button Width="200" Height="100" Background="#2196F3" BorderBrush="#4A90E2" 
+                    BorderThickness="1" Click="Learn_Click" Margin="0,0,0,20">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <Image Source="/imgs/book.png"  Width="48" Height="48" Margin="0,5"/>
+                    <TextBlock Text="수어 사전" FontSize="16" Foreground="white" FontWeight="SemiBold" TextAlignment="Center" FontFamily="Noto Sans KR"/>
+                </StackPanel>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="16" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+            <!-- 조회 이력 버튼 -->
+            <Button Width="200" Height="100" Background="#2196F3" BorderBrush="#4A90E2" 
+                    BorderThickness="1" Click="History_Click">
+                <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                    <Image Source="/imgs/history.png" Width="48" Height="48" Margin="0,5"/>
+                    <TextBlock Text="조회 이력" FontSize="16" Foreground="white" FontWeight="SemiBold" TextAlignment="Center" FontFamily="Noto Sans KR"/>
+                </StackPanel>
+                <Button.Template>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="16" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Button.Template>
+            </Button>
+
+        </StackPanel>
+    </Grid>
+</Page>

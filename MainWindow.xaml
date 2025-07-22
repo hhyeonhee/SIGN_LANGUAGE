@@ -1,0 +1,9 @@
+﻿<Window x:Class="Sign_Language.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AI 수어 프로그램" Height="600" Width="350">
+    <Grid>
+        <!-- 이 Frame 안에서 페이지들이 바뀌어 표시됨 -->
+        <Frame x:Name="MainFrame" NavigationUIVisibility="Hidden"/>
+    </Grid>
+</Window>
